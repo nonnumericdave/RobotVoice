@@ -12,6 +12,7 @@
 		B3A0CA381BB8CF4600FACBD2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A0CA361BB8CF4600FACBD2 /* Main.storyboard */; };
 		B3A0CA3A1BB8CF4600FACBD2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3A0CA391BB8CF4600FACBD2 /* Assets.xcassets */; };
 		B3A0CA3D1BB8CF4600FACBD2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A0CA3B1BB8CF4600FACBD2 /* LaunchScreen.storyboard */; };
+		B3A0CA451BB8D08500FACBD2 /* RobotVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0CA441BB8D08500FACBD2 /* RobotVoiceView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B3A0CA391BB8CF4600FACBD2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B3A0CA3C1BB8CF4600FACBD2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B3A0CA3E1BB8CF4600FACBD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B3A0CA441BB8D08500FACBD2 /* RobotVoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotVoiceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,12 +56,13 @@
 		B3A0CA311BB8CF4600FACBD2 /* RobotVoice */ = {
 			isa = PBXGroup;
 			children = (
-				B3A0CA321BB8CF4600FACBD2 /* AppDelegate.swift */,
-				B3A0CA341BB8CF4600FACBD2 /* ViewController.swift */,
-				B3A0CA361BB8CF4600FACBD2 /* Main.storyboard */,
 				B3A0CA391BB8CF4600FACBD2 /* Assets.xcassets */,
-				B3A0CA3B1BB8CF4600FACBD2 /* LaunchScreen.storyboard */,
+				B3A0CA321BB8CF4600FACBD2 /* AppDelegate.swift */,
 				B3A0CA3E1BB8CF4600FACBD2 /* Info.plist */,
+				B3A0CA3B1BB8CF4600FACBD2 /* LaunchScreen.storyboard */,
+				B3A0CA361BB8CF4600FACBD2 /* Main.storyboard */,
+				B3A0CA441BB8D08500FACBD2 /* RobotVoiceView.swift */,
+				B3A0CA341BB8CF4600FACBD2 /* ViewController.swift */,
 			);
 			path = RobotVoice;
 			sourceTree = "<group>";
@@ -134,6 +137,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3A0CA451BB8D08500FACBD2 /* RobotVoiceView.swift in Sources */,
 				B3A0CA351BB8CF4600FACBD2 /* ViewController.swift in Sources */,
 				B3A0CA331BB8CF4600FACBD2 /* AppDelegate.swift in Sources */,
 			);
