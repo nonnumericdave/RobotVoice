@@ -10,6 +10,7 @@ import UIKit
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 private let layerCount : Int = 25;
+private let layerSpacing : CGFloat = 10.0;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public class RobotVoiceView : UIView
@@ -65,7 +66,9 @@ public class RobotVoiceView : UIView
     {
         let viewSize = self.frame.size;
         
-        let layerWidth = viewSize.width / CGFloat(layerCount);
+        let layerWidth =
+            (viewSize.width - layerSpacing * CGFloat(layerCount - 1)) /
+            CGFloat(layerCount);
         
         var rectLayerFrame =
             CGRectMake(
@@ -76,7 +79,8 @@ public class RobotVoiceView : UIView
         
         for var index = 0; index < voiceLayerArray.count; ++index
         {
-            rectLayerFrame.origin.x = CGFloat(index) * layerWidth;
+            rectLayerFrame.origin.x =
+                CGFloat(index) * (layerWidth + layerSpacing);
             
             voiceLayerArray[index].frame = rectLayerFrame;
         }
