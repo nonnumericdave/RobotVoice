@@ -31,7 +31,7 @@ public class RobotVoiceView : UIView
         initializeRobotVoiceView();
     }
  
-    public override func layoutSubviews()
+    public override func layoutSubviews() -> Void
     {
         super.layoutSubviews();
         
@@ -62,7 +62,7 @@ public class RobotVoiceView : UIView
         }
     }
 
-    private func layoutVoiceLayers()
+    private func layoutVoiceLayers() -> Void
     {
         let viewSize = self.frame.size;
         
