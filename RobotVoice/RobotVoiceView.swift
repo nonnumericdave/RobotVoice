@@ -8,63 +8,79 @@
 
 import UIKit
 
-let layerWidth : CGFloat = 10.0;
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+private let layerCount : Int = 25;
 
-class RobotVoiceView : UIView
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+public class RobotVoiceView : UIView
 {
-    var layerArray : Array<CALayer> = []
-    
-    convenience
-    init()
+    // NSCoder
+    public required init?(coder decoder: NSCoder)
     {
-        self.init(frame:CGRectZero);
+        super.init(coder:decoder);
+        
+        initializeRobotVoiceView();
     }
     
-    override var frame : CGRect
+    // UIView
+    public override init(frame:CGRect)
     {
-        willSet(rectFrame)
-        {
-            let newLayerCount = Int(rectFrame.width / layerWidth);
-            assert( newLayerCount >= 0 );
-            
-            let oldLayerCount = layerArray.count;
-            assert( oldLayerCount >= 0 );
-            
-            if ( newLayerCount > oldLayerCount )
-            {
-                layerArray.reserveCapacity(newLayerCount);
-            
-                for _ in (oldLayerCount + 1) ... newLayerCount
-                {
-                    let layer = CALayer();
+        super.init(frame:frame);
+        
+        initializeRobotVoiceView();
+    }
+ 
+    public override func layoutSubviews()
+    {
+        super.layoutSubviews();
+        
+        layoutVoiceLayers();
+    }
 
-                    layer.backgroundColor = UIColor.blackColor().CGColor;
-                    
-                    self.layer.addSublayer(layer);
-                    layerArray.append(layer);
-                }
-            }
-            else if ( newLayerCount < oldLayerCount )
-            {
-                for layer in layerArray.dropFirst(newLayerCount)
-                {
-                    layer.removeFromSuperlayer();
-                }
-                
-                layerArray.removeRange(newLayerCount ... (oldLayerCount - 1));
-            }
+    // RobotVoiceView
+    private func initializeRobotVoiceView() -> Void
+    {
+        self.backgroundColor = UIColor.blackColor();
+        
+        initializeVoiceLayerArray();
+    }
+    
+    private func initializeVoiceLayerArray() -> Void
+    {
+        voiceLayerArray.reserveCapacity(layerCount);
+        
+        for var index = 0; index < layerCount; ++index
+        {
+            let layer = CALayer();
+
+            layer.backgroundColor = UIColor.whiteColor().CGColor;
             
-            for var index = 0; index < layerArray.count; ++index
-            {
-                let rectLayerFrame =
-                    CGRectMake(
-                        CGFloat(index) * layerWidth,
-                        0,
-                        layerWidth,
-                        rectFrame.height);
-                
-                layerArray[index].frame = rectLayerFrame;
-            }
+            self.layer.addSublayer(layer);
+
+            voiceLayerArray.append(layer);
         }
     }
+
+    private func layoutVoiceLayers()
+    {
+        let viewSize = self.frame.size;
+        
+        let layerWidth = viewSize.width / CGFloat(layerCount);
+        
+        var rectLayerFrame =
+            CGRectMake(
+                0,
+                0,
+                layerWidth,
+                viewSize.height);
+        
+        for var index = 0; index < voiceLayerArray.count; ++index
+        {
+            rectLayerFrame.origin.x = CGFloat(index) * layerWidth;
+            
+            voiceLayerArray[index].frame = rectLayerFrame;
+        }
+    }
+    
+    private var voiceLayerArray : Array<CALayer> = []
 }
