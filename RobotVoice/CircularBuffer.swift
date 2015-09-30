@@ -36,6 +36,12 @@ public class CircularBuffer<T> : Indexable
         bufferStartIndex = 0;
     }
 
+    public func append(newElement : T) -> Void
+    {
+        array[bufferStartIndex] = newElement;
+        bufferStartIndex = abs((1 &+ bufferStartIndex) % array.count);
+    }
+
     public func append(unsafePointerData : UnsafePointer<T>, count : Int) -> Void
     {
         let unsafePointerDataCopy =
