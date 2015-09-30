@@ -13,10 +13,12 @@ import UIKit;
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 private func AudioBuffersNeededForAudioBufferListSize(bufferListSize: Int) -> Int
 {
-    let baseAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:0);
-    let singleAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:1);
-    let sizePerAudioBuffer = singleAudioBufferListSize - baseAudioBufferListSize;
-    
+    let oneAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:1);
+    let twoAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:2);
+
+    let sizePerAudioBuffer = twoAudioBufferListSize - oneAudioBufferListSize;
+    let baseAudioBufferListSize = oneAudioBufferListSize - sizePerAudioBuffer;
+
     return (bufferListSize - baseAudioBufferListSize) / sizePerAudioBuffer;
 }
 
@@ -102,13 +104,14 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
         }
 
         var bufferListSizeNeeded : Int = 0;
+        var audioBufferList = AudioBufferList();
         var blockBuffer : CMBlockBuffer?;
         
         guard
             CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
                 sampleBuffer,
                 &bufferListSizeNeeded,
-                UnsafeMutablePointer<AudioBufferList>(),
+                &audioBufferList,
                 0,
                 kCFAllocatorSystemDefault,
                 kCFAllocatorSystemDefault,
