@@ -142,17 +142,18 @@ public class RobotVoiceView : UIView
 
         for (index, voiceLayer) in voiceLayerArray.enumerate()
         {
-            var rectLayerFrame = voiceLayer.frame;
-            
             let adjustedIndex =
                 (index < voiceLayerHeightArray.count) ?
                     index :
                     2 * voiceLayerHeightArray.count - index - 2;
-                    
-            rectLayerFrame.size.height =
-                voiceLayerHeightArray[adjustedIndex] * self.bounds.size.height;
+
+            let transform3d =
+                CATransform3DMakeScale(
+                    1,
+                    voiceLayerHeightArray[adjustedIndex],
+                    1);
             
-            voiceLayer.frame = rectLayerFrame;
+            voiceLayer.transform = transform3d;
         }
         
         objc_sync_exit(self);
