@@ -129,6 +129,19 @@ public class RobotVoiceView : UIView
                 CGFloat(index) * (layerWidth + layerSpacing);
             
             voiceLayer.frame = rectLayerFrame;
+            
+            let adjustedIndex =
+                (index < voiceLayerHeightArray.count) ?
+                    index :
+                    2 * voiceLayerHeightArray.count - index - 2;
+            
+            let transform3d =
+                CATransform3DMakeScale(
+                    1,
+                    voiceLayerHeightArray[adjustedIndex],
+                    1);
+            
+            voiceLayer.transform = transform3d;
         }
     }
     
