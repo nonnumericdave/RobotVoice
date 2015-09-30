@@ -11,7 +11,7 @@ import CoreMedia;
 import UIKit;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-private func AudioBuffersNeededForAudioBufferListSize(bufferListSize: Int) -> Int
+private func AudioBuffersNeededForAudioBufferListSize(bufferListSize : Int) -> Int
 {
     let oneAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:1);
     let twoAudioBufferListSize = AudioBufferList.sizeInBytes(maximumBuffers:2);
@@ -72,9 +72,9 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
     
     // AVCaptureAudioDataOutputSampleBufferDelegate
     internal func captureOutput(
-        captureOutput: AVCaptureOutput!,
-        didOutputSampleBuffer sampleBuffer: CMSampleBuffer!,
-        fromConnection connection: AVCaptureConnection!)
+        captureOutput : AVCaptureOutput!,
+        didOutputSampleBuffer sampleBuffer : CMSampleBuffer!,
+        fromConnection connection : AVCaptureConnection!)
     {
         guard
             let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer)
@@ -143,11 +143,18 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
             return;
         }
         
+        let robotVoiceView = view as! RobotVoiceView;
+        
         for audioBuffer in unsafeMutableAudioBufferListPointer
         {
-            let unsafePointerInt16 = UnsafePointer<Int16>(audioBuffer.mData);
+            let unsafePointerInt16AudioData = UnsafePointer<Int16>(audioBuffer.mData);
+
+            assert( audioBuffer.mDataByteSize % 2 == 0 );
+            let audioDataCount = audioBuffer.mDataByteSize / 2;
             
-            assert( unsafePointerInt16 != nil );
+            robotVoiceView.didReceiveAudioData(unsafePointerInt16AudioData, count:audioDataCount);
+            
+            assert( unsafePointerInt16AudioData != nil );
         }
         
         free(unsafeMutableAudioBufferListPointer.unsafeMutablePointer);
