@@ -8,8 +8,8 @@
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate : UIResponder, UIApplicationDelegate
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+@UIApplicationMain internal class AppDelegate : UIResponder, UIApplicationDelegate
 {
     var window : UIWindow?
 }
