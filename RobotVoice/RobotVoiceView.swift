@@ -19,9 +19,6 @@ public class RobotVoiceView : UIView
     // NSCoder
     public required init?(coder decoder : NSCoder)
     {
-        let count = Int(44100 * frameDuration);
-        circularBufferInt16AudioData = CircularBuffer<Int16>(count:count, repeatedValue:0);
-        
         super.init(coder:decoder);
         
         initializeRobotVoiceView();
@@ -30,9 +27,6 @@ public class RobotVoiceView : UIView
     // UIView
     public override init(frame : CGRect)
     {
-        let count = Int(44100 * frameDuration);
-        circularBufferInt16AudioData = CircularBuffer<Int16>(count:count, repeatedValue:0);
-        
         super.init(frame:frame);
         
         initializeRobotVoiceView();
@@ -62,25 +56,23 @@ public class RobotVoiceView : UIView
     public func didReceiveAudioData(unsafePointerInt16AudioData : UnsafePointer<Int16>, count audioDataCount : UInt32)
     {
         let intAudioDataCount = Int(audioDataCount);
-
-        circularBufferInt16AudioData.append(unsafePointerInt16AudioData, count:intAudioDataCount);
-        
-        let stride = circularBufferInt16AudioData.count / voiceLayerHeightArray.count;
         
         objc_sync_enter(self);
+
+        var indexOfNextSample = countToNextSample;
         
-        for var index = 0; index < voiceLayerHeightArray.count; ++index
+        while indexOfNextSample < intAudioDataCount
         {
-            var circularBufferIndex = index * stride;
-            if circularBufferIndex >= circularBufferInt16AudioData.count
-            {
-                circularBufferIndex = circularBufferInt16AudioData.count - 1;
-            }
+            let normalizedSample =
+                CGFloat(abs(unsafePointerInt16AudioData[indexOfNextSample])) /
+                CGFloat(Int16.max)
             
-            voiceLayerHeightArray[index] =
-                CGFloat(abs(circularBufferInt16AudioData[circularBufferIndex])) /
-                CGFloat(Int16.max);
+            voiceLayerHeightCircularBuffer.append(normalizedSample);
+            
+            indexOfNextSample += sampleStride;
         }
+        
+        countToNextSample = indexOfNextSample - intAudioDataCount;
         
         objc_sync_exit(self);
     }
@@ -94,6 +86,9 @@ public class RobotVoiceView : UIView
     
     private func initializeVoiceLayerArray() -> Void
     {
+        let samplesPerFrameCount = Int(44100 * frameDuration);
+        sampleStride = samplesPerFrameCount / voiceCount;
+        
         voiceLayerArray.reserveCapacity(layerCount);
         
         for var index = 0; index < layerCount; ++index
@@ -131,14 +126,14 @@ public class RobotVoiceView : UIView
             voiceLayer.frame = rectLayerFrame;
             
             let adjustedIndex =
-                (index < voiceLayerHeightArray.count) ?
+                (index < voiceLayerHeightCircularBuffer.count) ?
                     index :
-                    2 * voiceLayerHeightArray.count - index - 2;
+                    2 * voiceLayerHeightCircularBuffer.count - index - 2;
             
             let transform3d =
                 CATransform3DMakeScale(
                     1,
-                    voiceLayerHeightArray[adjustedIndex],
+                    voiceLayerHeightCircularBuffer[adjustedIndex],
                     1);
             
             voiceLayer.transform = transform3d;
@@ -156,14 +151,14 @@ public class RobotVoiceView : UIView
         for (index, voiceLayer) in voiceLayerArray.enumerate()
         {
             let adjustedIndex =
-                (index < voiceLayerHeightArray.count) ?
+                (index < voiceLayerHeightCircularBuffer.count) ?
                     index :
-                    2 * voiceLayerHeightArray.count - index - 2;
+                    2 * voiceLayerHeightCircularBuffer.count - index - 2;
 
             let transform3d =
                 CATransform3DMakeScale(
                     1,
-                    voiceLayerHeightArray[adjustedIndex],
+                    voiceLayerHeightCircularBuffer[adjustedIndex],
                     1);
             
             voiceLayer.transform = transform3d;
@@ -175,8 +170,9 @@ public class RobotVoiceView : UIView
     }
     
     private var frameDuration = 1.0 / 60.0;
-    private let circularBufferInt16AudioData : CircularBuffer<Int16>;
-    private var voiceLayerHeightArray = Array<CGFloat>(count:voiceCount, repeatedValue:0);
+    private var countToNextSample : Int = 0;
+    private var sampleStride : Int = 0;
+    private var voiceLayerHeightCircularBuffer = CircularBuffer<CGFloat>(count:voiceCount, repeatedValue:0);
     private var voiceLayerArray = Array<CALayer>();
     private var displayLink : CADisplayLink?;
 }
