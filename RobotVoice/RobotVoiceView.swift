@@ -9,14 +9,15 @@
 import UIKit
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-private let layerCount : Int = 25;
+private let voiceCount = 13;
+private let layerCount : Int = voiceCount * 2 - 1;
 private let layerSpacing : CGFloat = 10.0;
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 public class RobotVoiceView : UIView
 {
     // NSCoder
-    public required init?(coder decoder: NSCoder)
+    public required init?(coder decoder : NSCoder)
     {
         super.init(coder:decoder);
         
@@ -24,7 +25,7 @@ public class RobotVoiceView : UIView
     }
     
     // UIView
-    public override init(frame:CGRect)
+    public override init(frame : CGRect)
     {
         super.init(frame:frame);
         
@@ -39,6 +40,10 @@ public class RobotVoiceView : UIView
     }
 
     // RobotVoiceView
+    public func didReceiveAudioData(unsafePointerInt16AudioData : UnsafePointer<Int16>, count audioDataCount : UInt32)
+    {
+    }
+    
     private func initializeRobotVoiceView() -> Void
     {
         self.backgroundColor = UIColor.blackColor();
@@ -86,5 +91,6 @@ public class RobotVoiceView : UIView
         }
     }
     
+    private var frameDuration = 1.0 / 60.0;
     private var voiceLayerArray : Array<CALayer> = []
 }
