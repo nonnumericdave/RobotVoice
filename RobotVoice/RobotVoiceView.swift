@@ -77,12 +77,12 @@ public class RobotVoiceView : UIView
                 layerWidth,
                 viewSize.height);
         
-        for var index = 0; index < voiceLayerArray.count; ++index
+        for (index, voiceLayer) in voiceLayerArray.enumerate()
         {
             rectLayerFrame.origin.x =
                 CGFloat(index) * (layerWidth + layerSpacing);
             
-            voiceLayerArray[index].frame = rectLayerFrame;
+            voiceLayer.frame = rectLayerFrame;
         }
     }
     
