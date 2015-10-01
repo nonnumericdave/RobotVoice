@@ -63,9 +63,13 @@ public class RobotVoiceView : UIView
         
         while indexOfNextSample < intAudioDataCount
         {
+            let nextAbsoluteSample =
+                (unsafePointerInt16AudioData[indexOfNextSample] == Int16.min) ?
+                    Int16.max :
+                    abs(unsafePointerInt16AudioData[indexOfNextSample]);
+            
             let normalizedSample =
-                CGFloat(abs(unsafePointerInt16AudioData[indexOfNextSample])) /
-                CGFloat(Int16.max)
+                CGFloat(nextAbsoluteSample) / CGFloat(Int16.max);
             
             voiceLayerHeightCircularBuffer.append(normalizedSample);
             
