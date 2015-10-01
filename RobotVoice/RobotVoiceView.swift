@@ -144,7 +144,7 @@ public class RobotVoiceView : UIView
     {
         CATransaction.begin();
      
-        CATransaction.setAnimationDuration(0);
+        CATransaction.setDisableActions(true);
         
         objc_sync_enter(self);
 
