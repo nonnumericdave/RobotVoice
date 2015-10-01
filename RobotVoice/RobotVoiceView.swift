@@ -166,6 +166,8 @@ public class RobotVoiceView : UIView
                     1);
             
             voiceLayer.transform = transform3d;
+            
+            voiceLayer.backgroundColor = UIColor(white:voiceLayerHeightCircularBuffer[adjustedIndex], alpha:1).CGColor;
         }
         
         objc_sync_exit(self);
