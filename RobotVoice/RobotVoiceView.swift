@@ -124,11 +124,11 @@ public class RobotVoiceView : UIView
         
         for (index, voiceLayer) in voiceLayerArray.enumerate()
         {
-			voiceLayer.transform = CATransform3DIdentity;
-			
+            voiceLayer.transform = CATransform3DIdentity;
+            
             rectLayerFrame.origin.x =
                 CGFloat(index) * (layerWidth + layerSpacing);
-			
+            
             voiceLayer.frame = rectLayerFrame;
             
             let adjustedIndex =
