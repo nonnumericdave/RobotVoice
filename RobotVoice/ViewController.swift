@@ -156,6 +156,34 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
     }
     
     // ViewController
+	private func enumerateAudioCaptureInputPorts(@noescape block : (AVCaptureInputPort) -> Void)
+	{
+		guard
+			captureSession.outputs.count == 1,
+			let audioCaptureDataOutput = captureSession.outputs[0] as? AVCaptureAudioDataOutput,
+			let captureConnectionArray = audioCaptureDataOutput.connections as? [AVCaptureConnection]
+		else
+		{
+			return;
+		}
+		
+		for captureConnection in captureConnectionArray
+		{
+			guard
+				let captureInputPortArray = captureConnection.inputPorts as? [AVCaptureInputPort]
+			else
+			{
+				continue;
+			}
+			
+			for captureInputPort in captureInputPortArray
+			where captureInputPort.mediaType == AVMediaTypeAudio
+			{
+				block(captureInputPort);
+			}
+		}
+	}
+	
     private var captureSession = AVCaptureSession();
     private let dispatchQueue = dispatch_queue_create("com.playingandsuffering.RobotVoice", DISPATCH_QUEUE_SERIAL);
 }
