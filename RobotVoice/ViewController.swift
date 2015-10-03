@@ -46,11 +46,6 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
         {
             return;
         }
-
-        for captureDeviceFormat in audioCaptureDevice.formats as! [AVCaptureDeviceFormat]!
-        {
-            print("\(captureDeviceFormat)");
-        }
         
         let audioCaptureDeviceOutput = AVCaptureAudioDataOutput();
         audioCaptureDeviceOutput.setSampleBufferDelegate(self, queue:dispatchQueue)
