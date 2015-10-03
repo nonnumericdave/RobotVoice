@@ -46,18 +46,18 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
         {
             return;
         }
-        
-        let audioCaptureDeviceOutput = AVCaptureAudioDataOutput();
-        audioCaptureDeviceOutput.setSampleBufferDelegate(self, queue:dispatchQueue)
 
-        guard captureSession.canAddOutput(audioCaptureDeviceOutput)
+        let audioCaptureDataOutput = AVCaptureAudioDataOutput();
+        audioCaptureDataOutput.setSampleBufferDelegate(self, queue:dispatchQueue)
+
+        guard captureSession.canAddOutput(audioCaptureDataOutput)
         else
         {
             return;
         }
         
         captureSession.addInput(audioCaptureDeviceInput);
-        captureSession.addOutput(audioCaptureDeviceOutput);
+        captureSession.addOutput(audioCaptureDataOutput);
     }
     
     internal override func viewDidAppear(animated: Bool)
