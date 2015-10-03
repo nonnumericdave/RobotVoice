@@ -58,13 +58,10 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
         
         captureSession.addInput(audioCaptureDeviceInput);
         captureSession.addOutput(audioCaptureDataOutput);
+
+		captureSession.startRunning();
     }
-    
-    internal override func viewDidAppear(animated: Bool)
-    {
-        captureSession.startRunning();
-    }
-    
+
     // AVCaptureAudioDataOutputSampleBufferDelegate
     internal func captureOutput(
         captureOutput : AVCaptureOutput!,
