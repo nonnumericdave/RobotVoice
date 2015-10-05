@@ -263,16 +263,16 @@ internal class ViewController : UIViewController, AVCaptureAudioDataOutputSample
 
             let audioFormatIsSupported =
                 audioStreamBasicDescription.mFormatID == kAudioFormatLinearPCM &&
-                    audioStreamBasicDescription.mSampleRate == 44100.0 &&
-                    audioStreamBasicDescription.mFormatFlags ==
-                        (kAudioFormatFlagIsSignedInteger |
-                            kAudioFormatFlagsNativeEndian |
-                            kAudioFormatFlagIsPacked) &&
-                    audioStreamBasicDescription.mBytesPerPacket == 2 &&
-                    audioStreamBasicDescription.mFramesPerPacket == 1 &&
-                    audioStreamBasicDescription.mBytesPerFrame == 2 &&
-                    audioStreamBasicDescription.mChannelsPerFrame == 1 &&
-                    audioStreamBasicDescription.mBitsPerChannel == 16;
+                audioStreamBasicDescription.mSampleRate == 44100.0 &&
+                audioStreamBasicDescription.mFormatFlags ==
+                    (kAudioFormatFlagIsSignedInteger |
+                        kAudioFormatFlagsNativeEndian |
+                        kAudioFormatFlagIsPacked) &&
+                audioStreamBasicDescription.mBytesPerPacket == 2 &&
+                audioStreamBasicDescription.mFramesPerPacket == 1 &&
+                audioStreamBasicDescription.mBytesPerFrame == 2 &&
+                audioStreamBasicDescription.mChannelsPerFrame == 1 &&
+                audioStreamBasicDescription.mBitsPerChannel == 16;
             
             audioFormatIsSupportedUpdated = audioFormatIsSupportedUpdated && audioFormatIsSupported;
         });
