@@ -16,7 +16,8 @@ internal class ViewController : UIViewController, AudioDataSourceDelegate
     {
         super.viewDidLoad();
         
-        audioDataSource = AudioDataSource(delegate:self);
+        audioProcessor = AudioProcessor(delegate:self);
+        audioDataSource = AudioDataSource(delegate:audioProcessor!);
     }
     
     // AudioDataSourceDelegate
@@ -33,4 +34,5 @@ internal class ViewController : UIViewController, AudioDataSourceDelegate
 
     // ViewController
     private var audioDataSource : AudioDataSource?;
+    private var audioProcessor : AudioProcessor?;
 }
