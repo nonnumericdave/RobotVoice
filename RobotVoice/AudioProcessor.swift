@@ -44,16 +44,14 @@ class AudioProcessor : AudioDataSourceDelegate
         self.delegate = delegate;
         
         forwardDFTSetup =
-            vDSP_DFT_zrop_CreateSetup(
-                nil,
-                UInt(sampleCount),
-                .FORWARD);
+            vDSP_DFT_zrop_CreateSetup(nil,
+                                      UInt(sampleCount),
+                                      .FORWARD);
         
         inverseDFTSetup =
-            vDSP_DFT_zrop_CreateSetup(
-                forwardDFTSetup,
-                UInt(sampleCount),
-                .INVERSE);
+            vDSP_DFT_zrop_CreateSetup(forwardDFTSetup,
+                                      UInt(sampleCount),
+                                      .INVERSE);
         
         unsafeMutablePointerFloatAudioDataReal =
             UnsafeMutablePointer<Float>.alloc(sampleCount / 2);
