@@ -15,6 +15,7 @@
 		B3A0CA451BB8D08500FACBD2 /* RobotVoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0CA441BB8D08500FACBD2 /* RobotVoiceView.swift */; settings = {ASSET_TAGS = (); }; };
 		B3A0CA471BBBB7EE00FACBD2 /* CircularBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0CA461BBBB7EE00FACBD2 /* CircularBuffer.swift */; settings = {ASSET_TAGS = (); }; };
 		B3DABD491BC20AF0006BDC1D /* AudioDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DABD481BC20AF0006BDC1D /* AudioDataSource.swift */; settings = {ASSET_TAGS = (); }; };
+		B3DABD4B1BC244FF006BDC1D /* AudioProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DABD4A1BC244FF006BDC1D /* AudioProcessor.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		B3A0CA441BB8D08500FACBD2 /* RobotVoiceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RobotVoiceView.swift; sourceTree = "<group>"; };
 		B3A0CA461BBBB7EE00FACBD2 /* CircularBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularBuffer.swift; sourceTree = "<group>"; };
 		B3DABD481BC20AF0006BDC1D /* AudioDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioDataSource.swift; sourceTree = "<group>"; };
+		B3DABD4A1BC244FF006BDC1D /* AudioProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				B3A0CA391BB8CF4600FACBD2 /* Assets.xcassets */,
 				B3A0CA321BB8CF4600FACBD2 /* AppDelegate.swift */,
 				B3DABD481BC20AF0006BDC1D /* AudioDataSource.swift */,
+				B3DABD4A1BC244FF006BDC1D /* AudioProcessor.swift */,
 				B3A0CA461BBBB7EE00FACBD2 /* CircularBuffer.swift */,
 				B3A0CA3E1BB8CF4600FACBD2 /* Info.plist */,
 				B3A0CA3B1BB8CF4600FACBD2 /* LaunchScreen.storyboard */,
@@ -148,6 +151,7 @@
 				B3A0CA471BBBB7EE00FACBD2 /* CircularBuffer.swift in Sources */,
 				B3A0CA331BB8CF4600FACBD2 /* AppDelegate.swift in Sources */,
 				B3DABD491BC20AF0006BDC1D /* AudioDataSource.swift in Sources */,
+				B3DABD4B1BC244FF006BDC1D /* AudioProcessor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
